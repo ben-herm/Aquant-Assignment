@@ -18,10 +18,11 @@ export const Home = ({ navigation }: any) => {
 
   const renderItem = ({ item }: any) => {
     const shouldRender = item.name.toLowerCase().includes(searchQuery.toLowerCase())
+    const getColor = getRandomColor()
     if (shouldRender) {
-      return <ArticleCard backgroundColor={getRandomColor()} item={item} onPress={() => {
+      return <ArticleCard backgroundColor={getColor} item={item} onPress={() => {
         navigation.navigate(NAVIGATION.article, {
-          item: item
+        item: item
         });
       }} />
     }
