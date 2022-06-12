@@ -1,3 +1,4 @@
+import { typography } from '@/theme';
 import * as React from 'react';
 import { Dimensions } from 'react-native';
 import { Text } from 'react-native-paper';
@@ -8,7 +9,7 @@ const CustomText = ({ txt }: any) => {
             width: width,
             marginHorizontal: width * 0.03,
             marginVertical: width * 0.03,
-            fontSize: 20,
+            fontSize: typography.title.fontSize,
             fontWeight: 'bold',
             color: 'black',
             maxWidth: width * 0.85

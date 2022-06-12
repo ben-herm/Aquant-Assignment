@@ -1,47 +1,36 @@
-import { theme } from '@/theme';
 import React from 'react';
 import {
     View,
     StyleSheet,
-    Image,
     Dimensions,
     Text,
     TouchableNativeFeedback,
 } from 'react-native';
-import { getRandomColor } from '@/utils/ui_utils'
+import CustomText from './CustomText';
 const { width, height } = Dimensions.get('window');
 
-export const ArticleCard = ({ item, onPress,backgroundColor }: any) => {
+export const ArticleCard = ({ item, onPress, backgroundColor }: any) => {
     return (
         <View>
             <TouchableNativeFeedback onPress={onPress}>
-                <View style={{
-                    margin: 20,
-                    borderRadius: 15,
-                    backgroundColor: backgroundColor,
-                    height: 290,
-                    overflow: 'hidden',
-                    elevation: 3
-                }}>
-
-                    <Text style={{
-                        width: width,
-                        marginHorizontal: width * 0.03,
-                        marginVertical: width * 0.03,
-                        fontSize: 20,
-                        fontWeight: 'bold',
-                        color: theme.light.colors.primary,
-                        maxWidth: width * 0.85
-                    }} numberOfLines={2}>{item.name}</Text>
+                <View style={{ ...styles.container, backgroundColor: backgroundColor, }}>
+                    <CustomText txt={`name: ${item.name}`} />
                     <Text style={styles.desc} numberOfLines={2}>{item.description}</Text>
-                    <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-                    </View>
                 </View>
             </TouchableNativeFeedback>
         </View>
     );
 }
 const styles = StyleSheet.create({
+    container:
+    {
+        margin: 20,
+        borderRadius: 15,
+
+        height: 290,
+        overflow: 'hidden',
+        elevation: 3
+    },
     image: {
         width: width,
         height: height * 0.15,

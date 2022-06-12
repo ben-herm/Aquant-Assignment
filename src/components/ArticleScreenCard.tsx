@@ -7,6 +7,7 @@ import {
 } from 'react-native';
 import { getRandomColor } from '@/utils/ui_utils'
 import CustomText from './CustomText';
+import { theme, typography } from '@/theme';
 const { width, height } = Dimensions.get('window');
 
 export const ArticleScreenCard = ({ item }: any) => {
@@ -38,7 +39,7 @@ const styles = StyleSheet.create({
         width: width,
         marginHorizontal: width * 0.03,
         marginVertical: width * 0.03,
-        fontSize: 12,
+        fontSize: typography.caption,
         fontWeight: 'bold',
         color: 'black',
         maxWidth: width * 0.85
