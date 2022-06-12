@@ -35,9 +35,9 @@ const styles = StyleSheet.create({
     container:
     {
         margin: 20,
+        padding:10,
         borderRadius: 15,
-        // textAlign: 'center',
-        height: 290,
+        height: 220,
         overflow: 'hidden',
         elevation: 3
     },
