@@ -1,0 +1,1 @@
+export { NewsController } from '@/controllers/newsController/news_controller';
