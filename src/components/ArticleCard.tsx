@@ -5,17 +5,27 @@ import {
     Dimensions,
     Text,
     TouchableNativeFeedback,
+    GestureResponderEvent,
 } from 'react-native';
 import CustomText from './CustomText';
 const { width, height } = Dimensions.get('window');
 
-export const ArticleCard = ({ item, onPress, backgroundColor }: any) => {
+interface ArticalCardProps {
+    item: {
+        name: string
+        description: string
+    },
+    onPress: () => void,
+    backgroundColor: string
+}
+
+export const ArticleCard: React.FC<ArticalCardProps> = ({ item, onPress, backgroundColor }) => {
     return (
         <View>
             <TouchableNativeFeedback onPress={onPress}>
                 <View style={{ ...styles.container, backgroundColor: backgroundColor, }}>
                     <CustomText txt={`name: ${item.name}`} />
-                    <Text style={styles.desc} numberOfLines={2}>{item.description}</Text>
+                    <Text style={styles.desc}>{item.description}</Text>
                 </View>
             </TouchableNativeFeedback>
         </View>
@@ -26,7 +36,7 @@ const styles = StyleSheet.create({
     {
         margin: 20,
         borderRadius: 15,
-
+        // textAlign: 'center',
         height: 290,
         overflow: 'hidden',
         elevation: 3

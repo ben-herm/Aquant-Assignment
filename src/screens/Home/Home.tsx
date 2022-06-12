@@ -11,7 +11,6 @@ import { NAVIGATION } from '@/constants';
 import { getRandomColor } from '@/utils/ui_utils';
 
 export const Home = ({ navigation }: any) => {
-  const [isLoading, setLoading] = useState(true);
   const [news, setNews] = useState([])
   const [activeButton, setActiveButton] = useState('')
   const [searchQuery, setSearchQuery] = useState('');
@@ -35,11 +34,9 @@ export const Home = ({ navigation }: any) => {
       <View style={styles.buttonContainer}>
         {categories.map(({ name }) => {
           return <Button onPress={async () => {
-            setLoading(true)
             const data = await getNews(name)
             setNews(data.sources)
             setActiveButton(name)
-            setLoading(false)
           }} labelStyle={styles.labelStyle} style={[styles.button, activeButton === name && styles.activeButton]} icon={() => <View />} mode="contained" >
             {name}
           </Button>
