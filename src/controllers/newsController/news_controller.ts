@@ -1,20 +1,13 @@
-import { routes } from '@/controllers/newsController/routes';
+import { news_api_key } from '@/constants/api';
+import netWorkService from '@/networking/NetworkService'
+import { routes } from './routes';
 
-import { NetworkService, networkService } from '@/networking';
-
-
-export class NewsController {
-    networkService: NetworkService;
-    constructor() {
-        this.networkService = networkService;
-    }
-
-    getNews() {
-        let res = this.networkService.request({
-            method: 'GET',
-            url: routes.news.allNews,
-        });
-
-        console.log(res)
+export const getNews = async (value: string) => {
+    try {
+        const url = `${routes.news.topHeadlines}?category=${value}&apiKey=${news_api_key}`;
+        const res = await netWorkService.get(url)
+        return res.data
+    } catch (e) {
+        console.log(e)
     }
 }

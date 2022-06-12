@@ -1,23 +1,54 @@
-import { useTheme } from '@react-navigation/native';
-import React, { useEffect } from 'react';
-import { Text, View } from 'react-native';
-import { Config } from 'react-native-config';
+import React, { useState } from 'react';
+import { Button } from 'react-native-paper';
+import { View } from 'react-native';
 import { styles } from '@/screens/Home/Home.styles';
-import { typography } from '@/theme';
-import {NewsController } from '@/controllers/newsController';
+import SearchBar from '@/components/SearchBar';
+import categories from '@/constants/categories';
+import { getNews } from '@/controllers/newsController/news_controller';
+import { FlatList } from 'react-native-gesture-handler';
+import { ArticleCard } from '@/components/ArticleCard';
+import { NAVIGATION } from '@/constants';
 
-export function Home() {
-  const { colors } = useTheme();
-  const newsController = new NewsController();
+export const Home = ({ navigation }: any) => {
+  const [isLoading, setLoading] = useState(true);
+  const [news, setNews] = useState([])
+  const [activeButton, setActiveButton] = useState('')
+  const [searchQuery, setSearchQuery] = useState('');
 
-  useEffect(()=> {
-    newsController.getNews()
-  }, [])
+  const renderItem = ({ item }: any) => {
+    const shouldRender = item.name.toLowerCase().includes(searchQuery.toLowerCase())
+    if (shouldRender) {
+      return <ArticleCard item={item} onPress={() => {
+        navigation.navigate(NAVIGATION.article, {
+          item: item
+        });
+      }} />
+    }
+    return null
+  }
+
   return (
     <View style={styles.container}>
-      <Text style={[typography.title, { color: colors.text }]}>
-        {'Welcome'} {'Home'}
-      </Text>
+      <SearchBar searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
+      <View style={styles.buttonContainer}>
+        {categories.map(({ name }) => {
+          return <Button onPress={async () => {
+            setLoading(true)
+            const data = await getNews(name)
+            setNews(data.sources)
+            setActiveButton(name)
+            setLoading(false)
+          }} labelStyle={styles.labelStyle} style={[styles.button, activeButton === name && styles.activeButton]} icon={() => <View />} mode="contained" >
+            {name}
+          </Button>
+        })}
+      </View>
+      <View style={styles.articlesContainer}>
+        {<FlatList
+          data={news}
+          renderItem={renderItem}
+        />}
+      </View>
     </View>
   );
 }

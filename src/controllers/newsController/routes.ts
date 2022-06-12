@@ -1,5 +1,5 @@
 export const routes = {
     news: {
-      allNews: '/everything',
+      topHeadlines: '/top-headlines/sources'
     },
   };
