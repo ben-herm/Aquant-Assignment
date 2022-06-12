@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Button } from 'react-native-paper';
-import { View } from 'react-native';
+import { ActivityIndicator, View } from 'react-native';
 import { styles } from '@/screens/Home/Home.styles';
 import SearchBar from '@/components/SearchBar';
 import categories from '@/constants/categories';
@@ -12,6 +12,7 @@ import { getRandomColor } from '@/utils/ui_utils';
 
 export const Home = ({ navigation }: any) => {
   const [news, setNews] = useState<Array<any>>([])
+  const [isLoading, setIsLoading] = useState<boolean>(false)
   const [activeButton, setActiveButton] = useState<string>('')
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [articleColors, setArticleColors] = useState<Array<string>>([]);
@@ -36,32 +37,33 @@ export const Home = ({ navigation }: any) => {
   }
 
   const handleSearchQuery = async (value: string) => {
-  
     setSearchQuery(value)
-
     if (activeButton.length == 0) {
-   
+      setIsLoading(true)
       const data = await getAllNews(value)
       setNews(data.sources)
+      setIsLoading(false)
     }
-  
-    
+
+
   }
 
   const handleBtnPress = async (name: string) => {
     if (activeButton === name) {
       setActiveButton('')
     } else {
+      setIsLoading(true)
       const data = await getNews(name)
       setNews(data.sources)
       setActiveButton(name)
+      setIsLoading(false)
     }
 
   }
 
   return (
     <View style={styles.container}>
-      <SearchBar searchQuery={searchQuery} setSearchQuery={(value)=> handleSearchQuery(value)} />
+      <SearchBar searchQuery={searchQuery} setSearchQuery={(value) => handleSearchQuery(value)} />
       <View style={styles.buttonContainer}>
         {categories.map(({ name }) => {
           return <Button onPress={async () => handleBtnPress(name)} labelStyle={styles.labelStyle} style={[styles.button, activeButton === name && styles.activeButton]} icon={() => <View />} mode="contained" >
@@ -70,7 +72,7 @@ export const Home = ({ navigation }: any) => {
         })}
       </View>
       <View style={styles.articlesContainer}>
-        {<FlatList
+        {isLoading ? <ActivityIndicator style={{ paddingTop: 80 }} size="large" /> : <FlatList
           data={news}
           renderItem={renderItem}
         />}
