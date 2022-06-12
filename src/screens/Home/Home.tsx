@@ -17,7 +17,6 @@ export const Home = ({ navigation }: any) => {
   const [articleColors, setArticleColors] = useState<Array<string>>([]);
 
   useEffect(() => {
-    console.log('popo')
     let colorsArrayFromNews = news.map(() => getRandomColor())
     setArticleColors(colorsArrayFromNews)
   }, [news])
