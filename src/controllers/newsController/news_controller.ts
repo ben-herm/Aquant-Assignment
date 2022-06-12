@@ -10,4 +10,16 @@ export const getNews = async (value: string) => {
     } catch (e) {
         console.log(e)
     }
+    
+}
+
+export const getAllNews = async (value:string) => {
+    try {
+        const url = `${routes.news.topHeadlines}?q=${value}&apiKey=${news_api_key}`;
+        const res = await netWorkService.get(url)
+        return res.data
+    } catch (e) {
+        console.log(e)
+    }
+    
 }

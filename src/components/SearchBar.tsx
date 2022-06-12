@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Searchbar } from 'react-native-paper';
-
+import Icon from 'react-native-vector-icons/Ionicons';;
 const SearchBar = ({searchQuery, setSearchQuery}: any) => {
   const onChangeSearch = (query: string) => setSearchQuery(query);
   return (
@@ -10,6 +10,7 @@ const SearchBar = ({searchQuery, setSearchQuery}: any) => {
         width: '50%'
       }}
       placeholder="Search"
+      icon = {()=> <Icon size={20} name={'search'} solid/>}
       onChangeText={onChangeSearch}
       value={searchQuery}
     />

@@ -1,7 +1,7 @@
 import { theme } from "@/theme";
 
 export const getRandomColor = (): string => {
-    let rgb = [];
+    let rgb: Array<string> = [];
     for (const value of Object.values(theme.light.cardColors)) {
         rgb.push(value);
     }
