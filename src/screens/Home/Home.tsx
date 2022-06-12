@@ -8,6 +8,7 @@ import { getNews } from '@/controllers/newsController/news_controller';
 import { FlatList } from 'react-native-gesture-handler';
 import { ArticleCard } from '@/components/ArticleCard';
 import { NAVIGATION } from '@/constants';
+import { getRandomColor } from '@/utils/ui_utils';
 
 export const Home = ({ navigation }: any) => {
   const [isLoading, setLoading] = useState(true);
@@ -18,7 +19,7 @@ export const Home = ({ navigation }: any) => {
   const renderItem = ({ item }: any) => {
     const shouldRender = item.name.toLowerCase().includes(searchQuery.toLowerCase())
     if (shouldRender) {
-      return <ArticleCard item={item} onPress={() => {
+      return <ArticleCard backgroundColor={getRandomColor()} item={item} onPress={() => {
         navigation.navigate(NAVIGATION.article, {
           item: item
         });

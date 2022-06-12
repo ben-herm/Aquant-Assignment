@@ -11,14 +11,14 @@ import {
 import { getRandomColor } from '@/utils/ui_utils'
 const { width, height } = Dimensions.get('window');
 
-export const ArticleCard = ({ item, onPress }: any) => {
+export const ArticleCard = ({ item, onPress,backgroundColor }: any) => {
     return (
         <View>
             <TouchableNativeFeedback onPress={onPress}>
                 <View style={{
                     margin: 20,
                     borderRadius: 15,
-                    backgroundColor: getRandomColor(),
+                    backgroundColor: backgroundColor,
                     height: 290,
                     overflow: 'hidden',
                     elevation: 3
