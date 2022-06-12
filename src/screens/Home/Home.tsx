@@ -8,10 +8,10 @@ import {NewsController } from '@/controllers/newsController';
 
 export function Home() {
   const { colors } = useTheme();
-  const userController = new NewsController();
+  const newsController = new NewsController();
 
   useEffect(()=> {
-    userController.getNews()
+    newsController.getNews()
   }, [])
   return (
     <View style={styles.container}>
