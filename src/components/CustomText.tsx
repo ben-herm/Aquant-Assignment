@@ -2,8 +2,12 @@ import { typography } from '@/theme';
 import * as React from 'react';
 import { Dimensions } from 'react-native';
 import { Text } from 'react-native-paper';
+
 const { width } = Dimensions.get('window');
-const CustomText = ({ txt, numberOfLines }: any) => {
+interface CustomTextProps {
+    txt: string
+}
+const CustomText: React.FC<CustomTextProps> = ({ txt }) => {
     return (
         <Text style={{
             width: width,

@@ -5,11 +5,9 @@ import {
     Dimensions,
     Text,
     TouchableNativeFeedback,
-    GestureResponderEvent,
 } from 'react-native';
 import CustomText from './CustomText';
 const { width, height } = Dimensions.get('window');
-
 interface ArticalCardProps {
     item: {
         name: string

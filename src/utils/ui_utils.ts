@@ -2,10 +2,12 @@ import { theme } from "@/theme";
 
 export const getRandomColor = (): string => {
     let rgb: Array<string> = [];
-    for (const value of Object.values(theme.light.cardColors)) {
+    const {cardColors} = theme.light.colors
+    for (const value of Object.values(cardColors)) {
         rgb.push(value);
     }
-
-    let color = rgb[Math.floor(Math.random() * rgb.length)];
+    const color = rgb[Math.floor(Math.random() * rgb.length)];
     return color
 }
+
+export const mapDataWithRandomColor = (item) => ({ ...item, color: getRandomColor() })

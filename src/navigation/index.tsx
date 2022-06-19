@@ -6,7 +6,6 @@ import { theme } from '@/theme';
 
 export function RootNavigator() {
   const scheme = useColorScheme();
-
   return (
     <NavigationContainer theme={theme[scheme ?? 'light']} >
       <AppNavigator />

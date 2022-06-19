@@ -1,7 +1,13 @@
 import * as React from 'react';
 import { Searchbar } from 'react-native-paper';
-import Icon from 'react-native-vector-icons/Ionicons';;
-const SearchBar = ({searchQuery, setSearchQuery}: any) => {
+import Icon from 'react-native-vector-icons/Ionicons';
+
+interface SearchBarProps {
+  searchQuery: string,
+  setSearchQuery: (query:string) => void
+}
+
+const SearchBar:React.FC<SearchBarProps> = ({searchQuery, setSearchQuery}) => {
   const onChangeSearch = (query: string) => setSearchQuery(query);
   return (
     <Searchbar

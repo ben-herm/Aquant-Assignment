@@ -5,11 +5,10 @@ import {
     Dimensions,
     Text
 } from 'react-native';
-import { getRandomColor } from '@/utils/ui_utils'
 import CustomText from './CustomText';
 import {typography } from '@/theme';
+import { getRandomColor } from '@/utils/ui_utils';
 const { width, height } = Dimensions.get('window');
-
 interface ArticleScreenCardProps {
     item: {
         name: string
@@ -21,6 +20,7 @@ interface ArticleScreenCardProps {
 
 export const ArticleScreenCard:React.FC<ArticleScreenCardProps> = ({ item }: any) => {
     const { description, ...rest } = item
+    
     return (
         <View style={{
             margin: 20,
